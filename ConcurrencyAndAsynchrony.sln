@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31402.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcurrencyAndAsynchrony", "ConcurrencyAndAsynchrony\ConcurrencyAndAsynchrony.csproj", "{CCFFA7B8-B867-44CB-981D-017ECE57ED7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threading", "Threading\Threading.csproj", "{4499442E-B529-498F-A432-12A2F2A0382B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CCFFA7B8-B867-44CB-981D-017ECE57ED7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCFFA7B8-B867-44CB-981D-017ECE57ED7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCFFA7B8-B867-44CB-981D-017ECE57ED7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCFFA7B8-B867-44CB-981D-017ECE57ED7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4499442E-B529-498F-A432-12A2F2A0382B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4499442E-B529-498F-A432-12A2F2A0382B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4499442E-B529-498F-A432-12A2F2A0382B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4499442E-B529-498F-A432-12A2F2A0382B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {66EB9C74-635B-4603-93BF-5C67A31FFBDC}
+	EndGlobalSection
+EndGlobal
