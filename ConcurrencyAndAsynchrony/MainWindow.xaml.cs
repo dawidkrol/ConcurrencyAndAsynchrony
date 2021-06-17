@@ -45,18 +45,19 @@ namespace ConcurrencyAndAsynchrony
             //}
 
             //IMPORTANT V1
-            Task<string> a = Task.Run(() => th1(_progress));
-            var awai = a.GetAwaiter();
-            awai.OnCompleted(() =>
-            {
-                text1.Text = "Koniec";
-            });
+            //Task<string> a = Task.Run(() => th1(_progress));
+            //var awai = a.GetAwaiter();
+            //awai.OnCompleted(() =>
+            //{
+            //    text1.Text = "Koniec";
+            //});
             // IMPORTANT V2
             //Task<string> a = Task.Run(() => th1(MessageT1));
             //a.ContinueWith((q) =>
             //{
             //    Thread.Sleep(1000);
             //});
+            th3(_progress);
         }
 
         private void _progress_ProgressChanged(object sender, List<string> e)
@@ -90,6 +91,21 @@ namespace ConcurrencyAndAsynchrony
         //        Thread.Sleep(1000);
         //    }
         //}
+        private async void th3(IProgress<List<string>> progress)
+        {
+            await GetVsAsync(progress);
+        }
+        private async Task<List<string>> GetVsAsync(IProgress<List<string>> progress)
+        {
+            List<string> output = new List<string>();
+            for (int i = 0; i < 10; i++)
+            {
+                output.Add($"{i} \n");
+                progress?.Report(output);
+                await Task.Delay(1000);
+            }
+            return output;
+        }
         private void MessageT2(string message)
         {
             SContext.Post(_ => text2.Text += message, null);
