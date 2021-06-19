@@ -10,6 +10,18 @@ namespace AsynchronicOperations
 {
     public static class WebsiteThings
     {
+        public static List<string> GetDemonstrateWebsiteUrls()
+        {
+            List<string> output = new List<string>
+            {
+                "https://stackoverflow.com",
+                "https://www.youtube.com/",
+                "https://www.facebook.com/",
+                "https://www.instagram.com/",
+                "https://github.com/"
+            };
+            return output;
+        }
         public static async Task<string> DownloadWebsiteAsync(string webAdress)
         {
             WebClient Client = new WebClient();
