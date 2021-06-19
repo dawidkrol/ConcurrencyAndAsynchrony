@@ -68,7 +68,7 @@ namespace AsynchronicOperations
         {
             Message("");
             downParallel.IsEnabled = false;
-            await WebsiteThings.DownloadWebsitesParallel(WebsiteThings.GetDemonstrateWebsiteUrls(), _prog);
+            var result = await WebsiteThings.DownloadWebsitesParallel(WebsiteThings.GetDemonstrateWebsiteUrls(), _prog);
             downParallel.IsEnabled = true;
         }
 

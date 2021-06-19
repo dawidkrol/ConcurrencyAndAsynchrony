@@ -22,6 +22,12 @@ namespace AsynchronicOperations
             };
             return output;
         }
+        public static string DownloadWebsite(string webAdress)
+        {
+            WebClient Client = new WebClient();
+            string output = Client.DownloadString(webAdress);
+            return output;
+        }
         public static async Task<string> DownloadWebsiteAsync(string webAdress)
         {
             WebClient Client = new WebClient();
@@ -49,14 +55,14 @@ namespace AsynchronicOperations
             List<string> output = new List<string>();
             DownloadWebsitesProgress dp = new DownloadWebsitesProgress();
             await Task.Run(() =>
-            Parallel.ForEach(vs, async (item) =>
-            {
-                string temp = item;
-                output.Add(await WebsiteThings.DownloadWebsiteAsync(item));
-                dp.name.Add(temp);
-                dp.percentage = (int)(((decimal)dp.name.Count / (decimal)vs.Count) * 100);
-                progress?.Report(dp);
-            }));
+              Parallel.ForEach(vs, (item) =>
+              {
+                  string temp = item;
+                  output.Add(WebsiteThings.DownloadWebsite(item));
+                  dp.name.Add(temp);
+                  dp.percentage = (int)(((decimal)dp.name.Count / (decimal)vs.Count) * 100);
+                  progress?.Report(dp);
+              }));
             return output;
         }
     }
