@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace AsynchronicOperations
 {
@@ -52,14 +41,14 @@ namespace AsynchronicOperations
             try
             {
                 Message("");
-                await wb.DownloadWebsitesAsync(wb.GetDemonstrateWebsiteUrls(), _prog, ct.Token,() => Message("Canceling operation"));
+                await wb.DownloadWebsitesAsync(WebsiteThings.GetDemonstrateWebsiteUrls(), _prog, ct.Token, () => Message("Canceling operation"));
             }
             catch
             {
                 Message("Download calenced");
             }
-            finally 
-            { 
+            finally
+            {
                 downAsync.IsEnabled = true;
                 ct = new CancellationTokenSource();
             }
@@ -69,7 +58,7 @@ namespace AsynchronicOperations
         {
             Message("");
             downParallel.IsEnabled = false;
-            var result = await wb.DownloadWebsitesParallel(wb.GetDemonstrateWebsiteUrls(), _prog);
+            var result = await wb.DownloadWebsitesParallel(WebsiteThings.GetDemonstrateWebsiteUrls(), _prog);
             downParallel.IsEnabled = true;
         }
 

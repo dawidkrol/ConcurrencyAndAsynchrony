@@ -10,7 +10,7 @@ namespace AsynchronicOperations
 {
     public class WebsiteThings : IWebsiteThings
     {
-        public List<string> GetDemonstrateWebsiteUrls()
+        public static List<string> GetDemonstrateWebsiteUrls()
         {
             List<string> output = new List<string>
             {
