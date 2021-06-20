@@ -23,6 +23,7 @@ namespace AsynchronicOperations
     {
         CancellationTokenSource ct = new CancellationTokenSource();
         Progress<DownloadWebsitesProgress> _prog = new Progress<DownloadWebsitesProgress>();
+        IWebsiteThings wb = new WebsiteThings();
         public MainWindow()
         {
             InitializeComponent();
@@ -51,7 +52,7 @@ namespace AsynchronicOperations
             try
             {
                 Message("");
-                await WebsiteThings.DownloadWebsitesAsync(WebsiteThings.GetDemonstrateWebsiteUrls(), _prog, ct.Token,() => Message("Canceling operation"));
+                await wb.DownloadWebsitesAsync(wb.GetDemonstrateWebsiteUrls(), _prog, ct.Token,() => Message("Canceling operation"));
             }
             catch
             {
@@ -68,7 +69,7 @@ namespace AsynchronicOperations
         {
             Message("");
             downParallel.IsEnabled = false;
-            var result = await WebsiteThings.DownloadWebsitesParallel(WebsiteThings.GetDemonstrateWebsiteUrls(), _prog);
+            var result = await wb.DownloadWebsitesParallel(wb.GetDemonstrateWebsiteUrls(), _prog);
             downParallel.IsEnabled = true;
         }
 

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace AsynchronicOperations
 {
-    public static class WebsiteThings
+    public class WebsiteThings : IWebsiteThings
     {
-        public static List<string> GetDemonstrateWebsiteUrls()
+        public List<string> GetDemonstrateWebsiteUrls()
         {
             List<string> output = new List<string>
             {
@@ -22,19 +22,19 @@ namespace AsynchronicOperations
             };
             return output;
         }
-        public static string DownloadWebsite(string webAdress)
+        public string DownloadWebsite(string webAdress)
         {
             WebClient Client = new WebClient();
             string output = Client.DownloadString(webAdress);
             return output;
         }
-        public static async Task<string> DownloadWebsiteAsync(string webAdress)
+        public async Task<string> DownloadWebsiteAsync(string webAdress)
         {
             WebClient Client = new WebClient();
             string output = await Client.DownloadStringTaskAsync(webAdress);
             return output;
         }
-        public static async Task<List<string>> DownloadWebsitesAsync(List<string> vs, IProgress<DownloadWebsitesProgress> progress, CancellationToken ct, Action action)
+        public async Task<List<string>> DownloadWebsitesAsync(List<string> vs, IProgress<DownloadWebsitesProgress> progress, CancellationToken ct, Action action)
         {
             List<string> output = new List<string>();
             DownloadWebsitesProgress dp = new DownloadWebsitesProgress();
@@ -43,14 +43,14 @@ namespace AsynchronicOperations
             {
                 ct.ThrowIfCancellationRequested();
                 string temp = item;
-                output.Add(await WebsiteThings.DownloadWebsiteAsync(item));
+                output.Add(await DownloadWebsiteAsync(item));
                 dp.name.Add(temp);
                 dp.percentage = (int)(((decimal)dp.name.Count / (decimal)vs.Count) * 100);
                 progress?.Report(dp);
             }
             return output;
         }
-        public static async Task<List<string>> DownloadWebsitesParallel(List<string> vs, IProgress<DownloadWebsitesProgress> progress)
+        public async Task<List<string>> DownloadWebsitesParallel(List<string> vs, IProgress<DownloadWebsitesProgress> progress)
         {
             List<string> output = new List<string>();
             DownloadWebsitesProgress dp = new DownloadWebsitesProgress();
@@ -58,7 +58,7 @@ namespace AsynchronicOperations
               Parallel.ForEach(vs, (item) =>
               {
                   string temp = item;
-                  output.Add(WebsiteThings.DownloadWebsite(item));
+                  output.Add(DownloadWebsite(item));
                   dp.name.Add(temp);
                   dp.percentage = (int)(((decimal)dp.name.Count / (decimal)vs.Count) * 100);
                   progress?.Report(dp);
