@@ -11,11 +11,13 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="10*"></RowDefinition>
         </Grid.RowDefinitions>
         <ProgressBar x:Name="_progress" Grid.Row="0"></ProgressBar>
-        <Button x:Name="_start" Grid.Row="1" Click="_start_Click">Start asynchronic operation</Button>
-        <Button x:Name="_cancel" Grid.Row="2" Click="_cancel_Click">Cancel operation</Button>
-        <TextBlock x:Name="_tekst" Grid.Row="3"></TextBlock>
+        <ProgressBar x:Name="_progress2" Grid.Row="1"></ProgressBar>
+        <Button x:Name="_start" Grid.Row="2" Click="_start_Click">Start asynchronic operation</Button>
+        <Button x:Name="_cancel" Grid.Row="3" Click="_cancel_Click">Cancel operation</Button>
+        <TextBlock x:Name="_tekst" Grid.Row="4"></TextBlock>
     </Grid>
 </Window>

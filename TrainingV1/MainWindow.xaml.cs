@@ -1,18 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TrainingV1
 {
@@ -22,11 +12,18 @@ namespace TrainingV1
     public partial class MainWindow : Window
     {
         Progress<int> progressEvent = new Progress<int>();
+        Progress<int> progressEven2 = new Progress<int>();
         CancellationTokenSource cts = new CancellationTokenSource();
         public MainWindow()
         {
             InitializeComponent();
             progressEvent.ProgressChanged += ProgressEvent_ProgressChanged;
+            progressEven2.ProgressChanged += ProgressEven2_ProgressChanged;
+        }
+
+        private void ProgressEven2_ProgressChanged(object sender, int e)
+        {
+            _progress2.Value = e;
         }
 
         private void ProgressEvent_ProgressChanged(object sender, int e)
@@ -40,7 +37,11 @@ namespace TrainingV1
             {
                 SomeProcess sp = new SomeProcess();
                 _start.IsEnabled = false;
-                await sp.LongAsyncProcess(progressEvent, cts.Token, () => _tekst.Text = "Cancelating operation");
+                List<Task<string>> doubleTask = new List<Task<string>>();
+                doubleTask.Add(sp.LongAsyncProcess(progressEvent, cts.Token, () => _tekst.Text = "Cancelating operation", 500));
+                doubleTask.Add(sp.LongAsyncProcess(progressEven2, cts.Token, () => _tekst.Text = "Cancelating operation", 600));
+
+                await await Task.WhenAny(doubleTask);
             }
             catch (OperationCanceledException)
             {
