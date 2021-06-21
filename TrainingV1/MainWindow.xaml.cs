@@ -38,8 +38,9 @@ namespace TrainingV1
         {
             try
             {
+                SomeProcess sp = new SomeProcess();
                 _start.IsEnabled = false;
-                await LongAsyncProcess(progressEvent, cts.Token, () => _tekst.Text = "Cancelating operation");
+                await sp.LongAsyncProcess(progressEvent, cts.Token, () => _tekst.Text = "Cancelating operation");
             }
             catch (OperationCanceledException)
             {
@@ -55,21 +56,6 @@ namespace TrainingV1
         private void _cancel_Click(object sender, RoutedEventArgs e)
         {
             cts.Cancel();
-        }
-
-        private async Task<string> LongAsyncProcess(IProgress<int> _prog, CancellationToken ct,Action action)
-        {
-            string startValue = "Long text wchich is in long async function";
-            StringBuilder sb = new StringBuilder();
-            ct.Register(action);
-            foreach (var item in startValue)
-            {
-                ct.ThrowIfCancellationRequested();
-                sb.Append(item);
-                _prog?.Report((int)(((decimal)sb.Length*100)/((decimal)startValue.Length)));
-                await Task.Delay(100);
-            }
-            return sb.ToString();
         }
     }
 }
